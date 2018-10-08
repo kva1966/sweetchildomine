@@ -10,11 +10,24 @@ import static net.namingcrisis.sweetchildomine.jchild.Assert.assertFalse;
 import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
 
 /**
- * <p>Circle of children playing.</p>
+ * <p>Circle of children playing the counting game.</p>
+ *
+ * <p><strong>Rules:</strong></p>
+ *
+ * <ul>
+ *  <li>n children stand around a circle.</li>
+ *  <li>Starting with a given child and working clockwise, each child gets a
+ *    sequential number, which we will refer to as it’s id.</li>
+ *  <li>Then starting with the first child, they count out from 1 until k. The
+ *    k’th child is now out and leaves the circle. The count starts again
+ *    with the child immediately next to the eliminated one.</li>
+ *  <li>Children are so removed from the circle one by one. The winner is the
+ *    child left standing last.</li>
+ * </ul>
  *
  * <p>Non-threadsafe, non-resettable state: init, run, discard.</p>
  *
- * <strong>Assumptions:</strong>
+ * <p><strong>Assumptions:</strong></p>
  *
  * <ul>
  *   <li>Circle must have at least 2 children, or error thrown. A circle of
@@ -30,18 +43,18 @@ import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
  *   <li>Children IDs start from 0, thus 0 to n-1.</li>
  * </ul>
  */
-public final class Circle {
+public final class CountingCircleGame {
   /**
    * Children are simply represented by int ids for this simple scenario.
    */
   private final CircularLinkedList<Integer> children;
   private final int k;
 
-  public static Circle of(int nChildren, int kCountPerIteration) {
-    return new Circle(nChildren, kCountPerIteration);
+  public static CountingCircleGame of(int nChildren, int kCountPerIteration) {
+    return new CountingCircleGame(nChildren, kCountPerIteration);
   }
 
-  private Circle(int nChildren, int kCountPerIteration) {
+  private CountingCircleGame(int nChildren, int kCountPerIteration) {
     assertTrue(nChildren >= 2, () -> "at least 2 children expected");
     assertTrue(kCountPerIteration > 0, () -> "at least 1 count (k) expected");
 

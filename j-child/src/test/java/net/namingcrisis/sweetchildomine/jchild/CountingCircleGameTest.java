@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public final class CircleTest {
+public final class CountingCircleGameTest {
   @Test
   public void playMinimumChildren() {
     // Given: Minimum n
@@ -40,7 +40,7 @@ public final class CircleTest {
 //    assertResult(play(n, 4), child(0), child(1));
   }
 
-  private void assertResult(Circle.Result result, Integer lastKidStanding, Integer... exitSequence) {
+  private void assertResult(CountingCircleGame.Result result, Integer lastKidStanding, Integer... exitSequence) {
     System.out.println("> Result.lastChild -> " + result.lastChildStanding);
     System.out.println("> Result.exitSequence -> " + result.exitedChildrenInSequence);
 
@@ -48,7 +48,7 @@ public final class CircleTest {
     assertEquals(Arrays.asList(exitSequence), result.exitedChildrenInSequence);
   }
 
-  private Circle.Result play(int n, int k) {
-    return Circle.of(n, k).play();
+  private CountingCircleGame.Result play(int n, int k) {
+    return CountingCircleGame.of(n, k).play();
   }
 }
