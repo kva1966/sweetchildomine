@@ -14,13 +14,13 @@ public final class CircleTest {
 
     // Then:
     // k iterating once around circle
-    assertResult(play(n, 1), child(1), child(0));
-    assertResult(play(n, 2), child(0), child(1));
+    assertResult(play(n, 1), 1, 0);
+    assertResult(play(n, 2), 0, 1);
 
     // And:
     // k iterating twice around circle - no overflow errors
-    assertResult(play(n, 3), child(1), child(0));
-    assertResult(play(n, 4), child(0), child(1));
+    assertResult(play(n, 3), 1, 0);
+    assertResult(play(n, 4), 0, 1);
   }
 
   @Test
@@ -30,8 +30,8 @@ public final class CircleTest {
 
     // Then:
     // k iterating once around circle
-    assertResult(play(n, 1), child(2), child(0), child(1));
-    assertResult(play(n, 2), child(2), child(1), child(0));
+    assertResult(play(n, 1), 2, 0, 1);
+    assertResult(play(n, 2), 2, 1, 0);
 //    assertResult(play(n, 2), child(0), child(1));
 
     // And:
@@ -40,7 +40,7 @@ public final class CircleTest {
 //    assertResult(play(n, 4), child(0), child(1));
   }
 
-  private void assertResult(Circle.Result result, Child lastKidStanding, Child... exitSequence) {
+  private void assertResult(Circle.Result result, Integer lastKidStanding, Integer... exitSequence) {
     System.out.println("> Result.lastChild -> " + result.lastChildStanding);
     System.out.println("> Result.exitSequence -> " + result.exitedChildrenInSequence);
 
@@ -50,9 +50,5 @@ public final class CircleTest {
 
   private Circle.Result play(int n, int k) {
     return Circle.of(n, k).play();
-  }
-
-  private Child child(int id) {
-    return Child.newChild(id);
   }
 }

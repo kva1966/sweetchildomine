@@ -3,8 +3,8 @@ package net.namingcrisis.sweetchildomine.jchild;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 import static net.namingcrisis.sweetchildomine.jchild.Assert.assertFalse;
 import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
@@ -32,16 +32,9 @@ import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
  */
 public final class Circle {
   /**
-   * Linked structures, all things being equal, are generally more space efficient,
-   * Time and indexed access not necessary for this task.
-   *
-   * Am aware that better to use interfaces, but this is an internal design
-   * choice. An interesting situation is size(), here I'm cheating and relying
-   * on LinkedList having O(1) for size().
-   *
-   * Additionally, could write a custom circular list with nodes implementation,*
+   * Children are simply represented by int ids for this simple scenario.
    */
-  private final CircularLinkedList<Child> children;
+  private final CircularLinkedList<Integer> children;
   private final int k;
 
   public static Circle of(int nChildren, int kCountPerIteration) {
@@ -55,8 +48,8 @@ public final class Circle {
     k = kCountPerIteration;
     children = new CircularLinkedList<>(
       range(0, nChildren)
-        .mapToObj(Child::newChild)
-        .collect(Collectors.toList())
+        .boxed()
+        .collect(toList())
     );
   }
 
@@ -68,7 +61,7 @@ public final class Circle {
      * large values of n and k, but I haven't attempted to derive it; just iterating
      * through the children -- numerical approach taken.
      */
-    List<Child> exited = new LinkedList<>();
+    List<Integer> exited = new LinkedList<>();
 
     Supplier<Boolean> oneChildLeft = () -> children.size() == 1;
 
@@ -83,10 +76,10 @@ public final class Circle {
    * Data class. Yes, Kotlin would be nicer.
    */
   public static final class Result {
-    public final Child lastChildStanding;
-    public final List<Child> exitedChildrenInSequence;
+    public final Integer lastChildStanding;
+    public final List<Integer> exitedChildrenInSequence;
 
-    private Result(Child lastChildStanding, List<Child> exitedChildrenInSequence) {
+    private Result(Integer lastChildStanding, List<Integer> exitedChildrenInSequence) {
       this.exitedChildrenInSequence = exitedChildrenInSequence;
       this.lastChildStanding = lastChildStanding;
     }
