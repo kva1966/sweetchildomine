@@ -1,0 +1,21 @@
+plugins {
+  id 'java'
+}
+
+//
+// Transitive dependencies do not automatically become part of the project compile path.
+// Must explicitly be declared as a dependency.
+//
+configurations.compileClasspath.transitive = false
+
+version '0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile "junit:junit:${junitVersion}"
+}
