@@ -4,22 +4,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import static net.namingcrisis.sweetchildomine.jchild.Assert.assertFalse;
+import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
+
 /**
  * Stateful circular list that retains a pointer to its last point of iteration.
  *
  * @param <T> element type.
  */
 public final class CircularLinkedList<T> {
-  /**
-   * Linked structures, all things being equal, are generally more space efficient,
-   * Time and indexed access not necessary for this task.
-   *
-   * Am aware that better to use interfaces, but this is an internal design
-   * choice. An interesting situation is size(), here I'm cheating and relying
-   * on LinkedList having O(1) for size().
-   *
-   * Additionally, could write a custom circular list with nodes implementation,*
-   */
   private final LinkedList<T> elements;
   private Iterator<T> iterationState;
 
@@ -38,8 +31,8 @@ public final class CircularLinkedList<T> {
    * @return element at iteration point after circling k times.
    */
   public T circulateAndRemove(int k) {
-    Assert.assertTrue(k >= 1, () -> "");
-    Assert.assertFalse(elements.isEmpty(), () -> "No items left in list");
+    assertTrue(k >= 1, () -> "");
+    assertFalse(elements.isEmpty(), () -> "No items left in list");
 
     int curr = 0;
 
@@ -65,7 +58,7 @@ public final class CircularLinkedList<T> {
   }
 
   public T oneAndOnly() {
-    Assert.assertTrue(elements.size() == 1, () -> "Expecting exactly one element!");
+    assertTrue(elements.size() == 1, () -> "Expecting exactly one element!");
     return elements.getFirst();
   }
 }
