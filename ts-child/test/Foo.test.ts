@@ -1,4 +1,4 @@
-import Foo from "@app/Foo";
+import Foo from "../src/Foo";
 
 describe("Foo", () => {
   it("should return 5", () => {
