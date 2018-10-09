@@ -1,0 +1,52 @@
+plugins {
+  id 'com.moowork.node' version '1.2.0'
+}
+
+node {
+  version = '8.12.0'
+  download = true
+}
+
+
+////////////////////////////////////////////////
+
+/*
+ * Util tasks
+ */
+
+
+task npmTsLint(type: NpmTask) {
+  args = ['run', 'tslint']
+}
+
+task npmBuild(type: NpmTask, dependsOn: yarn) {
+  args = ['run', 'build']
+}
+
+task npmBuildWatch(type: NpmTask, dependsOn: yarn) {
+  args = ['run', 'build-watch']
+}
+
+task npmTest(type: NpmTask, dependsOn: npmBuild) {
+  args = ['run', 'test']
+}
+
+task npmTestWatch(type: NpmTask, dependsOn: npmBuild) {
+  args = ['run', 'test', '--', '--watchAll']
+}
+
+
+/////////////////////////////////////////////////
+
+
+/*
+ * Public hooks
+ */
+
+task build(dependsOn: [npmBuild, npmTsLint])
+
+task buildWatch(dependsOn: npmBuildWatch)
+
+task test(dependsOn: npmTest)
+
+task testWatch(type: NpmTask, dependsOn: npmTestWatch)

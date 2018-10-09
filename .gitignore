@@ -26,3 +26,6 @@ hs_err_pid*
 *.iml
 .gradle
 build/
+node_modules/
+dist/
+coverage/
