@@ -31,14 +31,14 @@ import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
  *
  * <ul>
  *   <li>Circle must have at least 2 children, or error thrown. A circle of
- *   one child may either hint at narcissistic tendencies, or conversely,
- *   a deep, strange one-ness with the universe.</li>
+ *    one child may either hint at narcissistic tendencies, or conversely,
+ *    a deep, strange oneness with the universe.</li>
  *
  *   <li>k must be at least 1, but can otherwise be any positive number,
- *        exceeding the number of children, so counts can go round the
- *        circle more than once before a kid is counted out. If 1,
- *        then we essentially have children immediately leaving in
- *        sequence from first to last.</li>
+ *    exceeding the number of children, so counts can go round the
+ *    circle more than once before a kid is counted out. If 1,
+ *    then we essentially have children immediately leaving in
+ *    sequence from first to last.</li>
  *
  *   <li>Children IDs start from 0, thus 0 to n-1.</li>
  * </ul>
@@ -79,7 +79,11 @@ public final class CountingCircleGame {
     Supplier<Boolean> oneChildLeft = () -> children.size() == 1;
 
     while (!oneChildLeft.get()) {
-      exited.add(children.circulateAndRemove(k));
+      Integer exitingChild = children
+        .circulate(k, (itr, elem) -> itr.remove())
+        .orElseThrow(() -> new IllegalStateException("Logic error, always expecting a value!"));
+
+      exited.add(exitingChild);
     }
 
     return new Result(children.oneAndOnly(), exited);
