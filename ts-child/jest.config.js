@@ -5,11 +5,7 @@ module.exports = {
         }
     },
     collectCoverageFrom: [
-        "**/*.{js,ts}",
-        "!**/jest.config.js",
-        "!**/node_modules/**",
-        "!**/dist/**",
-        "!**/coverage/**"
+        "**/src/**/*.{js,ts}"
     ],
     moduleFileExtensions: [
         'ts',
