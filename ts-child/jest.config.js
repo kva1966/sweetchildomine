@@ -4,6 +4,13 @@ module.exports = {
             tsConfig: 'tsconfig.json'
         }
     },
+    collectCoverageFrom: [
+        "**/*.{js,ts}",
+        "!**/jest.config.js",
+        "!**/node_modules/**",
+        "!**/dist/**",
+        "!**/coverage/**"
+    ],
     moduleFileExtensions: [
         'ts',
         'js'

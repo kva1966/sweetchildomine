@@ -40,8 +40,12 @@ task npmTestWatch(type: NpmTask, dependsOn: npmBuild) {
 
 
 /*
- * Public hooks
+ * Public Tasks
  */
+
+task clean(type: Delete) {
+  delete 'coverage', 'dist'
+}
 
 task build(dependsOn: [npmBuild, npmTsLint])
 
