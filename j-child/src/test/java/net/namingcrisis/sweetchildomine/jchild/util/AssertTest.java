@@ -1,8 +1,8 @@
-package net.namingcrisis.sweetchildomine.jchild;
+package net.namingcrisis.sweetchildomine.jchild.util;
 
 import org.junit.Test;
 
-import static net.namingcrisis.sweetchildomine.jchild.TestUtil.mustFail;
+import static net.namingcrisis.sweetchildomine.jchild.util.TestUtil.mustFail;
 
 public final class AssertTest {
 

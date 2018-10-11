@@ -4,10 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.namingcrisis.sweetchildomine.jchild.util.CircularLinkedList;
+
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
-import static net.namingcrisis.sweetchildomine.jchild.Assert.assertFalse;
-import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
+import static net.namingcrisis.sweetchildomine.jchild.util.Assert.assertFalse;
+import static net.namingcrisis.sweetchildomine.jchild.util.Assert.assertTrue;
 
 /**
  * <p>Circle of children playing the counting game.</p>

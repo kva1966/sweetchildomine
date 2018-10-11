@@ -1,4 +1,4 @@
-package net.namingcrisis.sweetchildomine.jchild;
+package net.namingcrisis.sweetchildomine.jchild.util;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import org.junit.Test;
 
-import static net.namingcrisis.sweetchildomine.jchild.TestUtil.mustFail;
+import static net.namingcrisis.sweetchildomine.jchild.util.TestUtil.mustFail;
 import static org.junit.Assert.*;
 
 public final class CircularLinkedListTest {

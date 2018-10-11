@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import static net.namingcrisis.sweetchildomine.jchild.TestUtil.mustFail;
+import static net.namingcrisis.sweetchildomine.jchild.util.TestUtil.mustFail;
 import static org.junit.Assert.assertEquals;
 
 public final class CountingCircleGameTest {

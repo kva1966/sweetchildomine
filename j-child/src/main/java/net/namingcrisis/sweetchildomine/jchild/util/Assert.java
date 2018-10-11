@@ -1,4 +1,4 @@
-package net.namingcrisis.sweetchildomine.jchild;
+package net.namingcrisis.sweetchildomine.jchild.util;
 
 import java.util.function.Supplier;
 

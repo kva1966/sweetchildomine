@@ -1,11 +1,11 @@
-package net.namingcrisis.sweetchildomine.jchild;
+package net.namingcrisis.sweetchildomine.jchild.util;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Optional;
 
-import static net.namingcrisis.sweetchildomine.jchild.Assert.assertTrue;
+import static net.namingcrisis.sweetchildomine.jchild.util.Assert.assertTrue;
 
 /**
  * Stateful circular list that retains a pointer to its last point of iteration.
