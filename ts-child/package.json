@@ -13,9 +13,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "build-watch": "tsc -w",
-    "test": "jest --forceExit --coverage --verbose",
-    "test-watch": "jest --forceExit --coverage --verbose --watchAll",
+    "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
     "tslint": "tslint -c tslint.json -p tsconfig.json"
   }
 }

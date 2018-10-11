@@ -24,7 +24,7 @@ task npmBuild(type: NpmTask, dependsOn: yarn) {
 }
 
 task npmBuildWatch(type: NpmTask, dependsOn: yarn) {
-  args = ['run', 'build-watch']
+  args = ['run', 'build', '--', '-w']
 }
 
 task npmTest(type: NpmTask, dependsOn: npmBuild) {
@@ -32,7 +32,7 @@ task npmTest(type: NpmTask, dependsOn: npmBuild) {
 }
 
 task npmTestWatch(type: NpmTask, dependsOn: npmBuild) {
-  args = ['run', 'test', '--', '--watchAll']
+  args = ['run', 'test', '--', '--watchAll', '--detectOpenHandles']
 }
 
 
