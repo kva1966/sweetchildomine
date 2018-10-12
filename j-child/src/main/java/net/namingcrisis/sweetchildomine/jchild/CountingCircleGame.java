@@ -69,7 +69,10 @@ public final class CountingCircleGame {
   }
 
   public Result play() {
-    assertFalse(children.isEmpty(), () -> "Circle has been broken, no children here");
+    assertFalse(
+      children.size() == 1,
+      () -> "Circle has been broken, one child left, game instance cannot be reused"
+    );
 
     /*
      * There's possibly an analytical solution/formula for this, especially useful for

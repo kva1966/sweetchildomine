@@ -2,6 +2,7 @@ package net.namingcrisis.sweetchildomine.jchild.util;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -84,39 +85,48 @@ public final class CircularLinkedListTest {
    */
   @Test
   public void circulateAndRemove() {
+    BiFunction<Optional<Integer>, Integer, Void> checkReturned = (opt, expected) -> {
+      assertTrue(opt.isPresent());
+      assertEquals(opt.get(), expected);
+      return null;
+    };
+
+    Optional<Integer> current;
+
     // single elem
-    CircularLinkedList<Integer> l1 = listOf(11);
-    l1.circulate(1, (itr, el) -> itr.remove());
+    final CircularLinkedList<Integer> l1 = listOf(11);
+    current = l1.circulate(1, (itr, el) -> itr.remove());
+    checkReturned.apply(current, 11);
     assertTrue(l1.isEmpty());
 
     // 2 elem, remove last
-    CircularLinkedList<Integer> l2 = listOf(11, 12);
-    l2.circulate(2, (itr, el) -> {
-      if (el == 12) {
-        itr.remove();
-      }
-    });
+    final CircularLinkedList<Integer> l2 = listOf(11, 12);
+    current = l2.circulate(2, (itr, el) -> itr.remove());
+    checkReturned.apply(current, 12);
     assertEquals(1, l2.size());
 
     // 2 elem, circle over and remove first
-    CircularLinkedList<Integer> l3 = listOf(11, 12);
-    l3.circulate(3, (itr, el) -> {
-      if (el == 11) {
-        itr.remove();
-      } else {
-        throw new AssertionError("Should never be called more than once!");
-      }
-    });
+    final CircularLinkedList<Integer> l3 = listOf(11, 12);
+    current = l3.circulate(3, (itr, el) -> itr.remove());
+    checkReturned.apply(current, 11);
     assertEquals(1, l3.size());
 
+    // 3 elem, keep every 2 till 1 left.
+    final CircularLinkedList<Integer> l4 = listOf(11, 12, 13);
+    current = l4.circulate(2, (itr, el) -> itr.remove());
+    checkReturned.apply(current, 12);
+    current = l4.circulate(2, (itr, el) -> itr.remove());
+    checkReturned.apply(current, 11);
+    assertEquals(1, l4.size());
+
     // orderly remove one by one leaves list empty
-    CircularLinkedList<Integer> l4 = listOf(0, 1, 2, 3, 4, 5);
-    assertEquals(6, l4.size()); // sanity check
+    CircularLinkedList<Integer> l5 = listOf(0, 1, 2, 3, 4, 5);
+    assertEquals(6, l5.size()); // sanity check
     IntStream.range(0, 6)
       .forEach(val ->
-        l4.circulate(1, (itr, e) -> itr.remove())
+        l5.circulate(1, (itr, e) -> itr.remove())
       );
-    assertTrue(l4.isEmpty());
+    assertTrue(l5.isEmpty());
   }
 
   private CircularLinkedList<Integer> listOf(Integer... elems) {

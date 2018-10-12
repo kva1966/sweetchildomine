@@ -46,6 +46,17 @@ public final class CountingCircleGameTest {
     mustFail(() -> play(2, 0), kValueMsg);
   }
 
+  @Test
+  public void cannotReuseGameInstance() {
+    CountingCircleGame game = CountingCircleGame.of(5, 1);
+    game.play();
+
+    mustFail(
+      game::play,
+      "Circle has been broken, one child left, game instance cannot be reused"
+    );
+  }
+
   private void assertResult(CountingCircleGame.Result result, Integer lastKidStanding, Integer... exitSequence) {
     assertEquals(lastKidStanding, result.lastChildStanding);
     assertEquals(Arrays.asList(exitSequence), result.exitedChildrenInSequence);
