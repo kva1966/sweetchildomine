@@ -7,6 +7,9 @@ module.exports = {
     collectCoverageFrom: [
         "**/src/**/*.{js,ts}"
     ],
+    moduleNameMapper: {
+        '^@app/(.*)$': '<rootDir>/src/$1'
+    },
     moduleFileExtensions: [
         'ts',
         'js'
