@@ -1,7 +1,5 @@
 # README
 
-`<<<WIP>>>`
-
 ## Overview
 
 Most significant files are annotated/commented upon, perhaps, at times, a bit 
@@ -13,8 +11,8 @@ components; presentation is limited to Gradle build and test output.
 
 There are 2 ports:
 
-1. Java 8
-2. TypeScript 3
+1. Java 8 (`<checkout>/j-child`)
+2. TypeScript 3 (`<checkout>/ts-child`)
 
 Since the TypeScript port is very similar to the Java 8 implementation, most
 design choices or notes are only in the J8 sources. Were it a production port,
@@ -37,8 +35,14 @@ git clone https://github.com/kva1966/sweetchildomine
 
 cd sweetchildomine
 
-# Runs both J8 and TS build and test
+# Get Gradle
+./gradlew
+
+# Build and run tests
 ./gradlew test
 ~~~
 
-
+This will use the packaged gradle wrapper to build. The build also brings in a
+project-only Node to build and run the client artefacts. This is done via the
+[Gradle Node Plugin](https://plugins.gradle.org/plugin/com.moowork.node).
+ 
