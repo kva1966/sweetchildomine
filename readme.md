@@ -10,7 +10,7 @@ There are 2 ports:
 1. Java 8 (`<checkout>/j-child`)
 2. TypeScript 3 (`<checkout>/ts-child`)
 
-Main entry points are `CountingCircleGame.(ts|js)`.
+Main entry points are `CountingCircleGame.(ts|java)`.
 
 ## Prerequisites
 
