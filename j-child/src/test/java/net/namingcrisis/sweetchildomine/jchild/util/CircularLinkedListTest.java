@@ -1,7 +1,7 @@
 package net.namingcrisis.sweetchildomine.jchild.util;
 
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -53,7 +53,7 @@ public final class CircularLinkedListTest {
   }
 
   @Test
-  public void circulateOnlyCallsVisitorOnceAtRightCountOnly() {
+  public void circulateOnlyCallsVisitorOnceAtCorrectCount() {
     listOf(11, 12, 13)
       .circulate(4, (itr, el) -> {
         if (el != 11) {
@@ -64,21 +64,18 @@ public final class CircularLinkedListTest {
 
   @Test
   public void circulateAndRead() {
-    Function<Integer, CircularLinkedList.Op<Integer>> opFactory =
-      expectedVal -> (it, val) -> assertEquals(expectedVal, val);
-
-    listOf(11).circulate(1, opFactory.apply(11));
-    listOf(11).circulate(2, opFactory.apply(11));
-    listOf(11).circulate(3, opFactory.apply(11));
-    listOf(11, 12).circulate(1, opFactory.apply(11));
-    listOf(11, 12).circulate(2, opFactory.apply(12));
-    listOf(11, 12).circulate(3, opFactory.apply(11));
-    listOf(11, 12).circulate(4, opFactory.apply(12));
-    listOf(11, 12, 13).circulate(1, opFactory.apply(11));
-    listOf(11, 12, 13).circulate(3, opFactory.apply(13));
-    listOf(11, 12, 13).circulate(4, opFactory.apply(11));
-    listOf(11, 12, 13).circulate(6, opFactory.apply(13));
-    listOf(11, 12, 13).circulate(9, opFactory.apply(13));
+    assertRead(listOf(11), 1, 11);
+    assertRead(listOf(11), 2, 11);
+    assertRead(listOf(11), 3, 11);
+    assertRead(listOf(11, 12), 1, 11);
+    assertRead(listOf(11, 12), 2, 12);
+    assertRead(listOf(11, 12), 3, 11);
+    assertRead(listOf(11, 12), 4, 12);
+    assertRead(listOf(11, 12, 13), 1, 11);
+    assertRead(listOf(11, 12, 13), 3, 13);
+    assertRead(listOf(11, 12, 13), 4, 11);
+    assertRead(listOf(11, 12, 13), 6, 13);
+    assertRead(listOf(11, 12, 13), 9, 13);
   }
 
   /**
@@ -124,5 +121,11 @@ public final class CircularLinkedListTest {
 
   private CircularLinkedList<Integer> listOf(Integer... elems) {
     return new CircularLinkedList<>(Arrays.asList(elems));
+  }
+
+  private void assertRead(CircularLinkedList<Integer> list, Integer k, Integer expectedReadValue) {
+    Optional<Integer> v = list.circulate(k, (it, val) -> assertEquals(expectedReadValue, val));
+    assertTrue(v.isPresent());
+    assertEquals(v.get(), expectedReadValue);
   }
 }

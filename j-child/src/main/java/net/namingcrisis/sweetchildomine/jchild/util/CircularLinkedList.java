@@ -20,7 +20,7 @@ public final class CircularLinkedList<T> {
    * More constructors/factories could be useful, keeping this to our common use
    * case for now.
    *
-   * @param elems to initialise this list from.
+   * @param elems to initialise this list from. Shallow copy.
    */
   public CircularLinkedList(Collection<T> elems) {
     elements = new LinkedList<>(elems);
@@ -61,14 +61,23 @@ public final class CircularLinkedList<T> {
     }
   }
 
+  /**
+   * @return true if list empty, false otherwise.
+   */
   public boolean isEmpty() {
     return elements.isEmpty();
   }
 
+  /**
+   * @return list size.
+   */
   public int size() {
     return elements.size();
   }
 
+  /**
+   * @return the element if exactly one element in list, error thrown otherwise.
+   */
   public T oneAndOnly() {
     assertTrue(elements.size() == 1, () -> "Expecting exactly one element!");
     return elements.getFirst();
